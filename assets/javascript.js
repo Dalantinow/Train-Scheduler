@@ -15,6 +15,13 @@ var destination = "";
 var time = ""
 var frequency = "";
 
+$("#clear-trains").on("click", function (event) {
+
+    dataRef.ref().remove();
+
+});
+
+
 
 $("#add-user").on("click", function (event) {
     event.preventDefault();
@@ -49,7 +56,7 @@ $("#add-user").on("click", function (event) {
 
 dataRef.ref().on("child_added", function (childSnapshot) {
 
-    console.log(childSnapshot.val());
+
 
     var name = childSnapshot.val().name;
     var destination = childSnapshot.val().destination;
