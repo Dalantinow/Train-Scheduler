@@ -18,7 +18,6 @@ var frequency = "";
 $("#clear-trains").on("click", function (event) {
 
     dataRef.ref().remove();
-
 });
 
 
@@ -68,18 +67,22 @@ dataRef.ref().on("child_added", function (childSnapshot) {
     console.log(time);
     console.log(frequency);
 
-    var nextArrival = moment(time, "hh:mm").add(frequency, "m");
+    var nextArrival = moment(time, "HH:mm").add(frequency, "m");
     var now = moment();
-    var away = nextArrival.diff(now, "m")
-
+    var away = parseInt(nextArrival.diff(now, "m"))
+    
     console.log(nextArrival);
-    console.log(away);
+    console.log(parseInt(away));
 
+    if (away < 0){
+        away = 1440 + away
+    }
+    
     var row = $("<tr>").append(
         $("<td>").text(name),
         $("<td>").text(destination),
         $("<td>").text(frequency),
-        $("<td>").text(nextArrival.format("hh:mm")),
+        $("<td>").text(nextArrival.format("HH:mm")),
         $("<td>").text(away),
     );
 
